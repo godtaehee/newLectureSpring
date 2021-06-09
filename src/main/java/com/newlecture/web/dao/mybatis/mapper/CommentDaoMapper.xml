@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newlecture.web.dao.CommentDao">
+
+    <select id="getList" resultType="com.newlecture.web.entity.Comment">
+        select * from Comment where ${param2} like '%${param3}%' order by regdate desc
+    </select>
+    
+    <insert id="insert" parameterType="com.newlecture.web.entity.Comment">
+    	insert into Comment(content, writerId, noticeId) 
+    	values(#{content}, #{writerId}, #{noticeId})
+    </insert>
+    
+    <select id="getComment" resultType="com.newlecture.web.entity.Comment">
+    	select * from Comment where id = #{id}
+    </select>
+    
+     <delete id="delete">
+    	delete from Comment where id = #{id}
+    </delete>
+    
+    <update id="update">
+    	update Comment
+    	SET
+		content = #{content},
+    </update>
+    
+    <select id="getCount" >
+        select count(id) from Comment where ${param1} like '%${param2}%'
+    </select>
+    
+<!--       <select id="getViewList" resultType="com.newlecture.web.entity.NoticeView">
+        select * from NoticeView where ${param2} like '%${param3}%' order by regdate desc
+    </select> -->
+    
+</mapper>
